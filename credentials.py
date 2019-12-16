@@ -1,164 +1,79 @@
-#!/usr/bin/env python3.6
-from user import User 
-from user import Credentials
+import pyperclip
+import string
 import random
+from user import User
 
-def create_user(user_name, password):
-    '''
-    Function to create a new contact
-    '''
-    new_user = User(user_name, password)
-    return new_user
+class Credential:
+	'''
+	Class to create  account credentials, generate passwords and save credentials and passwords
+	'''
+	# Class Variables
 
+	credentials_list =[]
 
-def save_user(User):
-    '''
-    Function to save user
-    '''
-    User.save_user()
+	def __init__(self,account,userName,password):
 
+		'''
+		Method to define the properties for each user object will hold.
+		'''
 
-def create_credential(user_name ,account_name , password):
-    '''
-    Function that creates new credentials.
-    '''
-    new_credential = Credentials(user_name ,account_name , password)
-    return new_credential
+		# instance variables
+		self.account = account
+		self.userName = userName
+		self.password = password
 
+	def save_credentials(self):
+		'''
+		save_credentials method saves a newly created users to credentials_list
+		'''
+		# global users_list
+		Credential.credentials_list.append(self)
 
-def save_credential(credential):
-    '''
-    Function to save a newly created credential.
-    '''
-    Credentials.save_credentials(credential)
+	def delete_credential(self):
+		'''
+		Deletes credentials on user command
+		'''
 
-def display_credentials(user_name):
-    '''
-    Function that returns saved credentials
-    '''
-    return Credentials.display_credentials(user_name)
+		self.credentials_list.remove(self)	
 
-def delete_credentials(Credentials):
-    '''
-    Function that deletes a credential
-    '''
-    Credentials.delete_credential()
-
-
-def find_by_account_name(account_name):
-    '''
-    Function that finds by account name.
-    '''
-    return Credentials.find_by_account_name(account_name)
-
-def copy_credential(account_name):
-    '''
-    Function that copies credentials details.
-    '''
-    return Credentials.copy_credential(account_name)
-
-def delete_credential(credential):
-    '''
-    Function that deletes credentials.
-    '''
-    credential.delete_credential()
-
-def check_credentials(account_name):
-    '''
-    Function that checks if a credential exists.
-    '''
-    return Credentials.credential_exist(account_name)\
+	@classmethod
+	def find_credentials(cls,account):
+		'''
+		Method that finds credentials from credentials_list
+		'''
+		for new in cls.credentials_list:
+			if new.account == account:
+				return new
+		
+	@classmethod
+	def credential_exists (cls,account):
+		'''
+		Method that checks if a credential exists in the credentials_List
+		'''
+		for exist in cls.credentials_list:
+			if exist.account == account:
+				return True
+		return False
 
 
-def main():
-    print("Hello Welcome to Password locker.")
-    user_name = input("Enter username >>")
-    password = input("Enter password >>")
+	def generate_password(self):
+		'''
+		Method to generate an 8 character password for a user 
+		'''
+		user_password = string.ascii_lowercase + string.ascii_lowercase + string.digits + "~!@#$%^&*"
+		return ''.join(random.choice(user_password) for _ in range(0,12))
 
-    print('\n')
-    print(f"Brilliant Agent {user_name}. Your in !!")
-    print('\n')
-    print(f"LOGIN SUCCESSFUL {user_name} Let's get to it.")
-    print('\n')
+	@classmethod
+	def display_credentials(cls):
+		'''
+		Class method to display the list of credentials saved
+		'''
+		return cls.credentials_list
 
-    while True:
-            print("Use these short codes : \n ac - Add new credentials, \n dc - display credentials, \n fc -find a credentials, \n ex -exit the app")
-
-            short_code = input().lower()
-            Credentials=""
-            if short_code == 'ac':
-                print("New credentials")
-                print("-"*10)
-
-                print("User name ...")
-                user_name = input('>>')
-
-                print("Account ...")
-                account_name = input('>>')
-
-                print("Password ...")
-                print('\n')
-                print("Would you like to generate a password ? (y/n)")
-                answer = input('>>')
-                if answer == 'y':
-                    print("Enter length of the password :")
-                    length = int (input('>>'))
-                    chars = "abcdefghijklmnopqrstuvwxyziABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()"
-                    password = ''
-
-                    for _ in range (length):
-                        password += random.choice(chars)    
-                    print (password)
-                    # return password
-                    
-                    
-                elif answer == 'n':
-                    print("Enter your preferred password :")
-                    password = input('>>')
-                # create and save new contact.
-                save_credential(create_credential(user_name, account_name, password))
-                print('\n')
-                print(f"New Credential {user_name} {account_name} created")
-                print('\n')   
-
-            elif short_code == 'dc':
-
-                if display_credentials(user_name):
-                    print("Here is a list of all your credentials")
-                    print('\n')
-
-                    for Credentials in display_credentials(user_name):
-                        print(
-                            f"USER NAME >> {Credentials.user_name} ACC NAME >>{Credentials.account_name} PASS >> {Credentials.account_password}")
-
-                    print('\n')
-                else:
-                    print('\n')
-                    print("You dont seem to have any credentials saved yet")
-                    print('\n')
-
-            elif short_code == 'fc':
-
-                print("Enter the account you want to search for")
-
-                search_account = input()
-                if check_credentials(search_account):
-                    search_account = find_by_account_name(search_account)
-                    print(f"{search_account.user_name} {search_account.user_name}")
-                    print('-' * 20)
-
-                    print(f"User name.......{search_account.user_name}")
-                    print(f"Account name.......{search_account.account_name}")
-                else:
-                    print("That credential does not exist")
-                    print('\n')
-            elif short_code == "ex":
-                print("Cheers Mate .......")
-                break
-            else:
-                print("I didn't quite get that. Please do use the short codes")
-
-
-if __name__ == '__main__':
-
-    main()
+	# @classmethod
+	# def copy_credential(cls,site_name):
+	# 	'''
+	# 	Class method that copies a credential's info after the credential's site name is entered
+	# 	'''
+	# 	find_credential = Credential.find_by_site_name(site_name)
+	# 	return pyperclip.copy(find_credential.password)
