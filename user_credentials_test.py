@@ -14,15 +14,15 @@ class TestUser(unittest.TestCase):
 		'''
 		Function to create a user account before each test
 		'''
-		self.new_user = User('Ngina','Ngish1234')
+		self.new_user = User('Daniel','daydroid')
 
 	def test__init__(self):
 		'''
 		Test to if check if user instances are initialized properly
 		'''
-		# self.assertEqual(self.new_user.account,"Phillis")
-		self.assertEqual(self.new_user.username,"Ngina")
-		self.assertEqual(self.new_user.password,"Ngish1234")
+		# self.assertEqual(self.new_user.account,"Ngaruiya")
+		self.assertEqual(self.new_user.username,"Daniel")
+		self.assertEqual(self.new_user.password,"day2371234")
 
 	def test_save_user(self):
 		'''
@@ -42,15 +42,15 @@ class TestCredentials(unittest.TestCase):
 	def setUp(self):
 		'''
 		'''
-		self.new_credential = Credential('Google','Ngina','Ngish1234')
+		self.new_credential = Credential('Google','Daniel','day2371234')
 		
 	def test__init__(self):
 		'''
 		Test to if check the initialization/creation of credential instances is properly done
 		'''
 		self.assertEqual(self.new_credential.account,'Google')
-		self.assertEqual(self.new_credential.userName,'Ngina')
-		self.assertEqual(self.new_credential.password,'Ngish1234')
+		self.assertEqual(self.new_credential.userName,'Daniel')
+		self.assertEqual(self.new_credential.password,'day2371234')
 	
 
 	def test_save_credentials(self):
@@ -64,7 +64,7 @@ class TestCredentials(unittest.TestCase):
 		'''
 		'''
 		self.new_credential.save_credentials()
-		test_credentials =  Credential('Google','Ngina','Ngish1234')
+		test_credentials =  Credential('Google','Daniel','day2371234')
 		test_credentials.save_credentials()
 		self.assertEqual(len(Credential.credentials_list),3)
 
@@ -72,7 +72,7 @@ class TestCredentials(unittest.TestCase):
 		'''
 		Testing whether delete credentials method works
 		'''		
-		test_credentials = Credential('Google','Ngina','Ngish1234')
+		test_credentials = Credential('Google','Daniel','day2371234')
 		test_credentials.save_credentials()
 		test_credentials.save_credentials()
 		self.assertEqual(len(Credential.credentials_list),1)

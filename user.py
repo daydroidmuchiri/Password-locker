@@ -7,7 +7,7 @@ class User:
 	# def setUp(self):
 	# 	'''
 	# 	'''
-	# 	self.new_user = User("Ngina","Phillis","ngina123")
+	# 	self.new_user = User("Daniel","Ngaruiya","Daniel123")
 
 	def __init__(self,username,password):
 		'''
