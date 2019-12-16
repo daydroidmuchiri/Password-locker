@@ -1,6 +1,6 @@
 # Password Locker
 
-#### 14.10.2019
+#### 16.12.2019
 
 #### AUTHOR ~ **Daniel Ngaruiya**
 
@@ -40,13 +40,16 @@ To fix a bug or enhance an existing module, follow these steps:
 * Push to the branch (git push origin improve-feature)
 * Create a Pull Request
 
-### BDD
-| BEHAVIOUR    | INPUT     | OUTPUT     |
-| -------------| :--------:| -----------|
-|Creating account|**INPUT >>**  ac | New credentials  |
-|Displays credentials|**INPUT >>** dc | USER NAME >>  ACC NAME >> PASS >>  |
-|Finds credentials|**INPUT >>** fc | Enter the account you want to search for |
-|Exits the App |**INPUT >>** ex | Cheers Mate |
+## BDD
+These are the behaviours that the application implements for use by a user.
+
+The user would like to :
+
+To create an account with my details - log in and password
+Store my existing login credentials
+Generate a password for a new credential/account
+Copy my credentials to the clipboard
+
 
 ## NO KNOWN BUGS
 No known bugs.
@@ -55,8 +58,8 @@ No known bugs.
 * Python
 
 ## SUPPORT AND CONTACT DETAILS
-* EMAIL ME @ official1offmark@gmail.com
-* CHECK OUT MY WORK @ https://github.com/MachariaMark/
+* EMAIL ME @ daydroidmuchiri@gmail.com
+* CHECK OUT MY WORK @ https://github.com/daydroidmuchiri/
 
 ### LICENCE
 [MITlicense](LICENSE) 2019 **Daniel Ngaruiya**
